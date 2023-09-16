@@ -27,20 +27,48 @@ public class NBody {
 
 
     }
+    public static int readNumber(String filename){
+        In in=new In(filename);
+        int num=in.readInt();
+        return num;
+    }
 
      public static void main(String[] args) {
-        Scanner input=new Scanner(System.in);
-        double T= input.nextDouble();
-        double dt= input.nextDouble();
-        String filename=input.next();
-        Planet []p=readPlanets(filename);
+         double T = new Double(args[0]);
+         double dt = new Double(args[1]);
+         String filename = args[2];
+         Planet []p=readPlanets(filename);
         double radius=readRadius(filename);
-        StdDraw.setScale(-100,100);
-        StdDraw.clear();
-        StdDraw.picture(0,0,"images/starfield.jpg");
-        StdDraw.show();
+        int num=readNumber(filename);
+        StdDraw.setXscale(-radius,radius);
+        StdDraw.setYscale(-radius,radius);
+        StdDraw.enableDoubleBuffering();
+        double time=0;
+        while(time!=T){
+            double []xForces=new double[num];
+            double []yForces=new double[num];
+            for(int i=0;i<num;i++){
+                xForces[i]=p[i].calcNetForceExertedByX(p);
+                yForces[i]=p[i].calcNetForceExertedByY(p);
+            }
+            for(int i=0;i<num;i++){
+                p[i].update(dt,xForces[i],yForces[i]);
+            }
+            StdDraw.picture(0,0,"images/starfield.jpg");
+            for(Planet planet:p){
+                planet.draw();
+            }
+            StdDraw.show();
+            StdDraw.pause(10);
+            time+=dt;
 
-
-
+        }
+         StdOut.printf("%d\n", p.length);
+         StdOut.printf("%.2e\n", radius);
+         for (int i = 0; i < p.length; i++) {
+             StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
+                     p[i].xxPos, p[i].yyPos, p[i].xxVel,
+                     p[i].yyVel, p[i].mass, p[i].imgFileName);
+         }
     }
 }
