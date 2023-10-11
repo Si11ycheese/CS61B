@@ -113,7 +113,7 @@ public class ArrayDeque<T> {
         size--;
         return temp;
     }
-    public void get(){
+    public void printDeque(){
         int ptr1=front;
         while(ptr1!=last){
             System.out.print(items[ptr1]+" ");

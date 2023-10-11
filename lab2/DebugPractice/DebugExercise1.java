@@ -26,3 +26,4 @@ public class DebugExercise1 {
         System.out.println("round(" + t3 + "/" + b3 + ")=" + result3);
     }
 }
+

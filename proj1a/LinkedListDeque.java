@@ -1,7 +1,6 @@
 public class LinkedListDeque<T> {
     private class IntNode{
         public T item;
-
         public IntNode next;
         public IntNode pre;
         public IntNode(T i,IntNode p,IntNode n){
@@ -30,13 +29,10 @@ public class LinkedListDeque<T> {
         size+=1;
     }
     public void addLast(T item){
+        IntNode p=new IntNode(item,sentinel.pre,sentinel);
+        sentinel.pre.next=p;
+        sentinel.pre=p;
         size+=1;
-        IntNode p=sentinel;
-        while(p.next!=null){
-            p=p.next;
-        }
-        p.next=new IntNode(item,p,sentinel);
-        sentinel.pre=p.next;
     }
     public boolean isEmpty(){
         return size==0;
@@ -45,32 +41,33 @@ public class LinkedListDeque<T> {
         return size;
     }
     public void printDeque(){
-        IntNode p=sentinel;
-        while(p.next!=null){
-            System.out.print(p.next.item+" ");
+        IntNode p=sentinel.next;
+        while(p!=sentinel){
+            System.out.print(p.item+" ");
             p=p.next;
         }
     }
     public T removeFirst(){
-        if(sentinel.next==null){
+        if(size==0){
             return null;
         }
         IntNode p=sentinel.next;
+        T item=p.item;
         sentinel.next=p.next;
         p.next.pre=sentinel;
-        return p.item;
+        size--;
+        return item;
     }
     public T removeLast(){
-        if(sentinel.pre==null){
+        if(size==0){
             return null;
         }
-        IntNode p=sentinel.next;
-        while(p!=null){
-            p=p.next;
-        }
+        IntNode p=sentinel.pre;
+        T item=p.item;
         p.pre.next=sentinel;
         sentinel.pre=p.pre;
-        return p.item;
+        size--;
+        return item;
     }
    public T get(int index){
         IntNode p=sentinel;
@@ -82,7 +79,7 @@ public class LinkedListDeque<T> {
         }
         return p.item;
    }
-   public T getREcursivehelper(IntNode p,int index){
+   private T getREcursivehelper(IntNode p,int index){
         if(index==0){
             return p.item;
         }
