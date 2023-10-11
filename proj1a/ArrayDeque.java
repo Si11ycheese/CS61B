@@ -26,16 +26,14 @@ public class ArrayDeque<T> {
         if (index == length - 1) {
             return 0;
         }
-        index += 1;
-        return index;
+        return index+1;
     }
 
     private int minusone(int index) {
         if (index == 0) {
             return length - 1;
         }
-        index -= 1;
-        return index;
+        return index-1;
     }
 
     private void grow() {
@@ -74,18 +72,20 @@ public class ArrayDeque<T> {
         items = newarray;
     }
     public void addFirst(T item){
-        if(size==length){
+        if(size==length-1){
             grow();
         }
         front=minusone(front);
         items[front]=item;
+        size+=;
     }
     public void addLast(T item){
-       if(size==length){
+       if(size==length-1:){
            grow();
        }
        items[last]=item;
        last=addone(last,length);
+       size++;
     }
     public T removeFirst(){
         if(length>=16&&(size/length<=0.25)){
@@ -95,7 +95,6 @@ public class ArrayDeque<T> {
             return null;
         }
         T temp=items[front];
-        items[front]=null;
         front=addone(front,length);
         size--;
         return temp;
@@ -107,11 +106,9 @@ public class ArrayDeque<T> {
         if(size==0){
             return null;
         }
-        T temp=items[minusone(last)];
-        items[minusone(last)]=null;
         last=minusone(last);
         size--;
-        return temp;
+        return items[last];
     }
     public void printDeque(){
         int ptr1=front;
@@ -121,7 +118,7 @@ public class ArrayDeque<T> {
         }
     }
     public T get(int index){
-        if(index>=length){
+        if(index>=size){
             return null;
         }
         int ptr1=front;
