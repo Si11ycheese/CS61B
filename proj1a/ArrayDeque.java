@@ -77,10 +77,10 @@ public class ArrayDeque<T> {
         }
         front=minusone(front);
         items[front]=item;
-        size+=;
+        size++;
     }
     public void addLast(T item){
-       if(size==length-1:){
+       if(size==length-1){
            grow();
        }
        items[last]=item;
