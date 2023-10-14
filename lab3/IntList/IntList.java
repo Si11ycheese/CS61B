@@ -250,7 +250,7 @@ public class IntList {
         return out.toString();
     }
     public  static IntList reverse(IntList A){
-        if(A.rest==null||A==null){
+        if(A==null||A.rest==null){
             return A;
         }
         IntList reverse_A=reverse(A.rest);
