@@ -2,8 +2,7 @@ package byog.TileEngine;
 
 import edu.princeton.cs.introcs.StdDraw;
 
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 
 /**
  * Utility class for rendering tiles. You do not need to modify this file. You're welcome
@@ -95,6 +94,31 @@ public class TERenderer {
                 }
                 world[x][y].draw(x + xOffset, y + yOffset);
             }
+        }
+        StdDraw.show();
+    }
+    /**
+     * Draw the menu.
+     */
+    public void showMenu() {
+        int midWidth = width / 2;
+        int midHeight = height / 2;
+        Font fTitle = new Font("Monaco", Font.BOLD, 30);
+        Font fOption = new Font("Monaco", Font.BOLD, 20);
+        String title = "原神";
+        String[] options = {"New game(N)", "Load game(L)", "Quit(:Q)","Presented By Sillycheese"};
+
+        StdDraw.clear(Color.black);
+        StdDraw.setPenColor(Color.YELLOW);
+        StdDraw.setFont(fTitle);
+        StdDraw.text(midWidth, midHeight / 2 * 3, title);
+        StdDraw.setPenColor(Color.white);
+        StdDraw.setFont(fOption);
+        for (int i = 0 ; i < options.length; i++) {
+            if(i==options.length-1){
+                StdDraw.setPenColor(Color.ORANGE);
+            }
+            StdDraw.text(midWidth, midHeight + 4 * (1 - i), options[i]);
         }
         StdDraw.show();
     }
