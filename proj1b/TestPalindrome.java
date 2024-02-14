@@ -22,6 +22,7 @@ public class TestPalindrome {
     public void testIsPalindrome(){
         Assert.assertFalse(palindrome.isPalindrome("cat"));
         assertTrue(palindrome.isPalindrome("racecar"));
+        assertTrue(palindrome.isPalindrome(null));
 
 
     }
